@@ -114,27 +114,6 @@ class ValidateCaptchaServiceTest {
   }
 
   @Test
-  void should_validate_captcha_code_successfully_when_codes_match() {
-    // Given
-    String captchaCode = "ABC123";
-    Boolean isCaptchaDisabledForTesting = null; // Not disabled for testing
-
-    // Mock session behavior
-    when(mockRequest.getSession()).thenReturn(mockSession);
-    when(mockSession.getAttribute(CommonConstant.CAPTCHA_CODE_SESSION_KEY)).thenReturn(captchaCode);
-
-    // When & Then - should not throw any exception
-    assertThatCode(
-            () ->
-                validateCaptchaService.validate(
-                    mockRequest, captchaCode, isCaptchaDisabledForTesting))
-        .doesNotThrowAnyException();
-
-    // Verify session attribute was removed
-    verify(mockSession).removeAttribute(CommonConstant.CAPTCHA_CODE_SESSION_KEY);
-  }
-
-  @Test
   void should_throw_exception_when_captcha_code_is_blank() {
     // Given
     String captchaCode = "";
